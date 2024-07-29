@@ -1,5 +1,5 @@
 - name: Disable Mysql Older Version
-  ansible.builtin.shell: mysql
+  ansible.builtin.shell: dnf module disable mysql -y
 
 - name: Copy Mysql Repo
   ansible.builtin.template:
