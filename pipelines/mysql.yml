@@ -21,7 +21,7 @@ pipelines:
               tasks:
                 - exec:
                     command: ansible-playbook
-                    arguments: ["-i", "54.152.193.4,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=mysql", "expense.yml"]
+                    arguments: ["-i", "mysql.akrdevops.online,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=mysql", "expense.yml"]
 
       - QA:
           fetch_materials: true
