@@ -1,0 +1,60 @@
+pipelines:
+  ansible:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-fe20804:
+        git: https://github.com/akr9757/expense-ansible.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - DEV:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            shell:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ansible-playbook
+                    arguments: ["-i", "54.152.193.4,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=frontend", "expense.yml"]
+
+      - QA:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            shell:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    run_if: passed
+
+      - UAT:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            shell:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    run_if: passed
+
+      - PROD:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            shell:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    run_if: passed
