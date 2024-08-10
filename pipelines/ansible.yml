@@ -23,7 +23,7 @@ pipelines:
                     command: ansible
                     arguments: ["-playbook", "-i", "54.152.193.4,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=frontend"]
 
-      - DEV:
+      - QA:
           fetch_materials: true
           approval:
             type: manual
