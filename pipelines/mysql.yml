@@ -1,5 +1,5 @@
 pipelines:
-  ansible:
+  mysql:
     group: defaultGroup
     label_template: ${COUNT}
     lock_behavior: none
