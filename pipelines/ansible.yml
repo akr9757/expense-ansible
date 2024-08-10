@@ -10,14 +10,11 @@ pipelines:
         shallow_clone: false
         auto_update: true
         branch: main
-    DEV:
-      - ansible_code:
+    stages:
+      - DEV:
           fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
           approval:
             type: manual
-            allow_only_on_success: false
           jobs:
             shell:
               timeout: 0
@@ -26,4 +23,27 @@ pipelines:
                     command: ansible
                     arguments: ["-playbook", "-i", "54.152.193.4,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=frontend"]
 
+      - DEV:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            shell:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    run_if: passed
 
+
+      - PROD:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            shell:
+              timeout: 0
+              tasks:
+                - exec:
+                    command: ls
+                    run_if: passed
