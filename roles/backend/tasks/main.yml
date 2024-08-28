@@ -34,10 +34,20 @@
 
 - name: Install Mysql
   ansible.builtin.dnf:
-    name: mysql
+    name: "{ { item } }"
+    state: installed
+  loop:
+    - mysql
+    - python3-PyMySQL
 
-- name: Load Schema
-  ansible.builtin.shell: mysql -h mysql-dev.akrdevops.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
+- name: Dump all databases to hostname.sql
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /app/schema/backend.sql
+    login_user: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds_username', region='us-east-1' ) }}"
+    login_host: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds_endpoint', region='us-east-1' ) }}"
+    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds_password', region='us-east-1' ) }}"
 
 - name: Start service nginx
   ansible.builtin.service:
