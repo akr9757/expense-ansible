@@ -47,6 +47,8 @@
   ansible.builtin.service:
     name: backend
     state: restarted
+    daemon-reload: yes
+    enabled: yes
 
 #    login_user: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.username', region='us-east-1' ) }}"
 #    login_host: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.endpoint', region='us-east-1' ) }}"
