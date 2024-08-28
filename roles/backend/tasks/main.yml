@@ -39,9 +39,9 @@
     state: import
     name: all
     target: /app/schema/backend.sql
-    login_user: admin1
-    login_host: dev-expense-rds.clcucwu2kydp.us-east-1.rds.amazonaws.com
-    login_password: ExpenseApp123
+    login_user: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.username', region='us-east-1' ) }}"
+    login_host: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.endpoint', region='us-east-1' ) }}"
+    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.password', region='us-east-1' ) }}"
 
 - name: Start service nginx
   ansible.builtin.service:
@@ -50,6 +50,3 @@
     daemon-reload: yes
     enabled: yes
 
-#    login_user: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.username', region='us-east-1' ) }}"
-#    login_host: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.endpoint', region='us-east-1' ) }}"
-#    login_password: "{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.password', region='us-east-1' ) }}"
