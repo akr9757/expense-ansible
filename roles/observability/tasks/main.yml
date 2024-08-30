@@ -1,5 +1,5 @@
 - name: Set HostName Prompt
-  ansible.builtin.shell: set hostname {{env}}-{{component_name}}
+  ansible.builtin.shell: set-hostname {{env}}-{{component_name}}
 
 - name: Unarchive and Install node exporter
   ansible.builtin.unarchive:
