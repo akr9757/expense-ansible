@@ -1,0 +1,20 @@
+- name: Set HostName Prompt
+  ansible.builtin.shell: set hostname {{env}}-{{component_name}}
+
+- name: Unarchive and Install node exporter
+  ansible.builtin.unarchive:
+    src: https://github.com/prometheus/node_exporter/releases/download/v{{node_exporter_version}}/node_exporter-{{node_exporter_version}}.linux-amd64.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Copy Prometheus Service
+  ansible.builtin.template:
+    src: node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+
+- name: Start Service Prometheus
+  ansible.builtin.systemd:
+    name: prometheus
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
