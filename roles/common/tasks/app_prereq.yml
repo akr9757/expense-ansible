@@ -7,7 +7,7 @@
   ansible.builtin.file:
     path: "{{ app_path }}"
     state: directory
-    owner: {{app_user}}
+    owner: "{{app_user}}"
 
 - name: Unarchive file
   ansible.builtin.unarchive:
