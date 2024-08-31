@@ -32,6 +32,11 @@
   args:
     chdir: /app
 
+- name: Copy Run Script
+  ansible.builtin.template:
+    src: run.sh
+    dest: /app/run.sh
+
 - { name: Install Mysql, ansible.builtin.dnf: { name: "{{ item }}", state: installed }, loop: [ mysql, python3-PyMySQL ] }
 
 - name: Dump all databases to hostname.sql
@@ -49,4 +54,3 @@
     state: restarted
     daemon-reload: yes
     enabled: yes
-
