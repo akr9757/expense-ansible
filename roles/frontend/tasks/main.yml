@@ -20,3 +20,5 @@
     enabled: yes
     daemon-reload: yes
 
+- name: New Relic Setup for Nginx
+  ansible:builtin.shell: curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY={{ lookup('amazon.aws.aws_ssm', 'expense.newrelic.key', region='us-east-1' ) }} NEW_RELIC_ACCOUNT_ID={{ lookup('amazon.aws.aws_ssm', 'newrelic.account.id', region='us-east-1' ) }} /usr/local/bin/newrelic install -y
