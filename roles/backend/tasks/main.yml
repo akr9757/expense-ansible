@@ -28,7 +28,7 @@
     path: /app
 
 - name: Install New relic npm dependency
-  ansible.builtin.shell: npm install newrelic --save -g
+  ansible.builtin.shell: npm install newrelic --save
 # -g is for telling the global users
   args:
     chdir: /app
