@@ -6,6 +6,7 @@ User=expense
 Environment=DB_HOST="{{ lookup('amazon.aws.aws_ssm', 'dev.expense.rds.endpoint', region='us-east-1' ) }}"
 ExecStart=/bin/bash /app/run.sh
 SyslogIdentifier=backend
+WorkingDirectory=/app
 
 [Install]
 WantedBy=multi-user.target
