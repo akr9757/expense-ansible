@@ -22,14 +22,14 @@ filebeat.inputs:
   - type: filestream
 
     # Unique ID among all inputs, an ID is required.
-    id: my-filestream-id
+    id: "{{ component }}"
 
     # Change to true to enable this input configuration.
-    enabled: false
+    enabled: true
 
     # Paths that should be crawled and fetched. Glob based paths.
     paths:
-      - /var/log/*.log
+      - "{{ logfile_path }}"
       #- c:\programdata\elasticsearch\logs\*
 
     # Exclude lines. A list of regular expressions to match. It drops the lines that are
@@ -50,9 +50,9 @@ filebeat.inputs:
 
     # Optional additional fields. These fields can be freely picked
     # to add additional information to the crawled log files for filtering
-    #fields:
-    #  level: debug
-    #  review: 1
+    fields:
+      component: "{{ component }}"
+#      review: 1
 
 # ============================== Filebeat modules ==============================
 
@@ -153,9 +153,9 @@ output.elasticsearch:
   #password: "changeme"
 
   # ------------------------------ Logstash Output -------------------------------
-  #output.logstash:
-  # The Logstash hosts
-  #hosts: ["elk-pvt.akrdevops.online:5044"]
+output.logstash:
+#  The Logstash hosts
+  hosts: ["elk-pvt.akrdevops.online:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
