@@ -22,7 +22,7 @@ filebeat.inputs:
   - type: filestream
 
     # Unique ID among all inputs, an ID is required.
-    id: "{{ component }}"
+    id: "{{ component_name }}"
 
     # Change to true to enable this input configuration.
     enabled: true
