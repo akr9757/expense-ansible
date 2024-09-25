@@ -155,7 +155,7 @@ output.elasticsearch:
   # ------------------------------ Logstash Output -------------------------------
 output.logstash:
 #  The Logstash hosts
-  hosts: ["elk-pvt.akrdevops.online:5044"]
+  hosts: ["172.31.27.227:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
